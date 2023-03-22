@@ -69,5 +69,35 @@ describe('testing endpoints for "people"', function () {
     expect(response.body).to.deep.equal(peopleList[0]);
   });
 
+  it('tests updates on person who has id 1', async function () {
+    sinon.stub(connection, 'execute').resolves([{ affectedRows: 1 }]);
+    const response = await chai
+      .request(app)
+      .put('/people/1')
+      .send(
+        {
+          firstName: 'Lucão',
+          lastName: 'Andarilho dos céus',
+          email: 'lucao.andarilho@trybe.com',
+          phone: '851 678 4453',
+        },
+      );
+
+    expect(response.status).to.equal(200);
+    expect(response.body).to
+      .deep.equal({ message: 'Pessoa de id 1 atualizada com sucesso' });
+  });
+
+  it('tests removing person with id 1', async function () {
+    sinon.stub(connection, 'execute').resolves([{ affectedRows: 1 }]);
+    const response = await chai
+      .request(app)
+      .delete('/people/1');
+
+    expect(response.status).to.equal(200);
+    expect(response.body).to
+      .deep.equal({ message: 'Pessoa de id 1 excluída com sucesso' });
+  });
+
   afterEach(sinon.restore);
 });
