@@ -1,2 +1,2 @@
 # trybecash
-Expense tracker back-end with express.js, mysql and docker
+Expense tracker back-end done for school with express.js, mysql and docker
